@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain, IpcMessageEvent } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
 import {
@@ -15,11 +15,13 @@ if (isDevelopment) {
 
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
 let mainWindow: any
+let imageWindow: any
 
 // Standard scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true })
 function createMainWindow () {
-  const window = new BrowserWindow()
+  const window = new BrowserWindow({webPreferences : {webSecurity: false}})
+  const image = new BrowserWindow({width: 500, height: 500})
 
   if (isDevelopment) {
     // Load the url of the dev server if in development mode
@@ -32,13 +34,18 @@ function createMainWindow () {
       formatUrl({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'file',
-        slashes: true
+        slashes: true,
       })
     )
   }
 
   window.on('closed', () => {
     mainWindow = null
+  })
+
+  image.on('close', (e: Event) =>{
+    e.preventDefault()
+    image.hide()
   })
 
   window.webContents.on('devtools-opened', () => {
@@ -48,6 +55,7 @@ function createMainWindow () {
     })
   })
 
+  imageWindow = image
   return window
 }
 
@@ -74,3 +82,8 @@ app.on('ready', async () => {
   }
   mainWindow = createMainWindow()
 })
+
+ipcMain.on('toggle-image', (event: IpcMessageEvent, arg: any) =>{
+  imageWindow.show()
+})
+

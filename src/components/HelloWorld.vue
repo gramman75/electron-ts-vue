@@ -1,40 +1,39 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript" target="_blank" rel="noopener">typescript</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
+    <ul class="list-group">
+      <li class="list-group-item flex-container" v-for="post in posts" :key="post.data.id" @click="openImage">
+        <img :src="post.data.thumbnail" class="thumbnail"/>
+        <div>{{ post.data.title}}</div>
+      </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import axios from 'axios'
+import { ipcRenderer } from 'electron';
 
 @Component
 export default class HelloWorld extends Vue {
-  @Prop() private msg!: string;
+  private posts: Array<any> = []
+
+  private created() {
+    axios.get('https://reddit.com/r/aww.json')
+      .then(response => {
+        this.posts = response.data.data.children
+      })
+      .catch(error =>{
+        console.log(error)
+      })
+  }
+
+  private openImage() {
+    ipcRenderer.send('toggle-image')
+  }
+
+
+
 }
 </script>
 
@@ -53,5 +52,23 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.thumbnail {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.flex-container{
+  display: flex;
+  align-items: center;
+}
+
+.list-group-item{
+  cursor: pointer;
+}
+.list-group-item:hover{
+  background-color: #eee;
 }
 </style>
