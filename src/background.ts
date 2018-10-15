@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, ipcMain, IpcMessageEvent } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain, IpcMessageEvent, shell } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
 import {
@@ -56,6 +56,12 @@ function createMainWindow () {
   })
 
   imageWindow = image
+
+  let filePath = path.join(app.getAppPath(),'test.txt')
+  console.log(filePath)
+  // shell.showItemInFolder(filePath)
+  shell.openItem(filePath)
+
   return window
 }
 

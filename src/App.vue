@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
+      <router-link to="/onOff">On-Off Line Test</router-link>
     </div>
     <router-view/>
   </div>
