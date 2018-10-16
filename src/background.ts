@@ -3,8 +3,9 @@
 import { app, protocol, BrowserWindow, ipcMain, IpcMessageEvent, shell } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
+// const isOnline = require('is-online')
 import {isOnline} from 'is-online'
-import * as $ from 'jquery'
+
 
 // const isOnline = require('is-online')
 
@@ -104,21 +105,20 @@ let checkIsOnlineInterval: NodeJS.Timer
 let currentOnlineStatus  = {}
 
 function checkIsOnline() {
-  // isOnline
-  // isOnline().then( (online:any) => {
-  //   console.log('online? ' + online)
-  //   mainWindow.webContents.send('update-online-status', {online: online})
-  //   if (currentOnlineStatus != online){
-  //     if (process.platform === 'darwin' ){
-  //       app.dock.bounce('informational')
-  //     }
-  //   }
-  //   currentOnlineStatus = online
-  // })
+  isOnline().then( (online:any) => {
+    console.log('online? ' + online)
+    mainWindow.webContents.send('update-online-status', {online: online})
+    if (currentOnlineStatus != online){
+      if (process.platform === 'darwin' ){
+        app.dock.bounce('informational')
+      }
+    }
+    currentOnlineStatus = online
+  })
 }
 
 function startCheckingOnlineStatus(){
   checkIsOnlineInterval = setInterval(checkIsOnline, 10000)
 }
 
-// ipcMain.on('check-online-status', checkIsOnline)
+ipcMain.on('check-online-status', checkIsOnline)

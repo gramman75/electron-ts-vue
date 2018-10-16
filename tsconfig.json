@@ -11,12 +11,13 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "typeRoots": ["./node_modules/@types","./typings"],
+    "allowJs": true,
+    "typeRoots": ["./node_modules/@types","./types"],
     // "types": [
-    //   "webpack-env",
-    //   "./@types"
+    //   "webpack-env"
     // ],
     "paths": {
+      "*": ["types/*"],
       "@/*": [
         "src/*"
       ]
@@ -33,7 +34,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx", "typings/is-online/is-online.d.ts", "typings/is-online11/index.d.ts"
   ],
   "exclude": [
     "node_modules"
