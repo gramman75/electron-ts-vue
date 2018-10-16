@@ -16,33 +16,73 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { ipcRenderer } from 'electron';
+
 
 
 @Component
 export default class OnOffCheck extends Vue {
 
-    document: any;
-
+    private onlineStatus: any = undefined
     private created(){
-        window.addEventListener('online', this.updateOnlineStatus)
-        window.addEventListener('offline', this.updateOnlineStatus)
-        this.document.getElementById('checkStatusButton').addEventListener('click', this.updateOnlineStatus)
-
-        this.updateOnlineStatus()
+        ipcRenderer.on('update-online-status', this.updateOnlineStatus)
     }
 
-    private updateOnlineStatus(): void{
-       if( navigator.onLine ) {
-            this.document.body.style.backgroundColor = 'green'
-            this.document.getElementById( 'h2-checking' ).style.display = 'none'
-            this.document.getElementById( 'h2-online' ).style.display = 'block'
-            this.document.getElementById( 'h2-offline' ).style.display = 'none'
+    private mounted(){
+        // window.addEventListener('online', this.updateOnlineStatus)
+        // window.addEventListener('offline', this.updateOnlineStatus)
+        let btnCheckStatus = document.getElementById('checkStatusButton');
+        
+        if (btnCheckStatus)
+            btnCheckStatus.addEventListener('click', this.checkOnlineStatus)
+
+        this.checkOnlineStatus()
+    }
+
+    private checkOnlineStatus(){
+        ipcRenderer.send('check-online-status')
+    }
+
+    private updateOnlineStatus(event: any, status: any): void{
+        let checking = document.getElementById('h2-checking')
+        let online = document.getElementById('h2-online')
+        let offline = document.getElementById('h2-offline')
+        
+        // let status = navigator.onLine ? 'On-Line' : 'Off-Line'
+
+        if( status.online) {
+            document.body.style.backgroundColor = 'green'
+
+            if (checking) checking.style.display = 'none'
+            if (online) online.style.display = 'block'
+            if (offline) offline.style.display = 'none'
         } else {
-            this.document.body.style.backgroundColor = 'red'
-            this.document.getElementById( 'h2-checking' ).style.display = 'none'
-            this.document.getElementById( 'h2-online' ).style.display = 'none'
-            this.document.getElementById( 'h2-offline' ).style.display = 'block'
+            document.body.style.backgroundColor = 'red'
+            if (checking) checking.style.display = 'none'
+            if (online) online.style.display = 'none' 
+            if (offline) offline.style.display = 'block'
         }
+
+
+        if (this.onlineStatus !== undefined && this.onlineStatus !== status.online){
+            let note = new Notification('Your are ' + status, {
+                body: '상태를 표시',
+                data: 'data',
+                dir:  "auto",
+                icon: 'icon',
+                lang: 'lang',
+                tag: 'tag'
+    
+            })
+    
+            note.onclick = () =>{
+                console.log('Notification Clicked')
+            }
+
+            this.onlineStatus = status.online
+
+        }
+
     }
 
 }
