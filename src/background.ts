@@ -22,12 +22,22 @@ if (isDevelopment) {
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
 let mainWindow: any
 let imageWindow: any
+let splashWindow: any
 
 // Standard scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true })
 function createMainWindow () {
   const window = new BrowserWindow({webPreferences : {webSecurity: false}})
   const image = new BrowserWindow({width: 500, height: 500})
+  splashWindow = new BrowserWindow({
+    width: 320,
+    height: 240,
+    frame: false,
+    resizable: false,
+    backgroundColor: '#FFF',
+    alwaysOnTop: true,
+    show: true 
+  })
 
   if (isDevelopment) {
     // Load the url of the dev server if in development mode
@@ -60,6 +70,16 @@ function createMainWindow () {
       window.focus()
     })
   })
+
+  splashWindow.on('closed', () =>{
+    splashWindow = null
+  })
+
+  splashWindow.once('ready-to-show', () =>{
+    splashWindow.show()
+  })
+
+
 
   imageWindow = image
 
@@ -105,16 +125,16 @@ let checkIsOnlineInterval: NodeJS.Timer
 let currentOnlineStatus  = {}
 
 function checkIsOnline() {
-  isOnline().then( (online:any) => {
-    console.log('online? ' + online)
-    mainWindow.webContents.send('update-online-status', {online: online})
-    if (currentOnlineStatus != online){
-      if (process.platform === 'darwin' ){
-        app.dock.bounce('informational')
-      }
-    }
-    currentOnlineStatus = online
-  })
+  // isOnline().then( (online:any) => {
+  //   console.log('online? ' + online)
+  //   mainWindow.webContents.send('update-online-status', {online: online})
+  //   if (currentOnlineStatus != online){
+  //     if (process.platform === 'darwin' ){
+  //       app.dock.bounce('informational')
+  //     }
+  //   }
+  //   currentOnlineStatus = online
+  // })
 }
 
 function startCheckingOnlineStatus(){
