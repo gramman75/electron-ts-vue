@@ -25,6 +25,17 @@ export default new Router({
       path: '/onOff',
       name: 'onOff',
       component: () => import('./views/OnOff.vue')
+    },
+    {
+      path: '/raddit',
+      name: 'raddit',
+      component: () => import('./views/Raddit.vue')
+    },
+    {
+      path: '/start',
+      name: 'start',
+      component: () => import('./views/Start.vue')
     }
+
   ],
 });

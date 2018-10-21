@@ -21,23 +21,11 @@ if (isDevelopment) {
 
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
 let mainWindow: any
-let imageWindow: any
-let splashWindow: any
 
 // Standard scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true })
 function createMainWindow () {
   const window = new BrowserWindow({webPreferences : {webSecurity: false}})
-  const image = new BrowserWindow({width: 500, height: 500})
-  splashWindow = new BrowserWindow({
-    width: 320,
-    height: 240,
-    frame: false,
-    resizable: false,
-    backgroundColor: '#FFF',
-    alwaysOnTop: true,
-    show: true 
-  })
 
   if (isDevelopment) {
     // Load the url of the dev server if in development mode
@@ -59,36 +47,12 @@ function createMainWindow () {
     mainWindow = null
   })
 
-  image.on('close', (e: Event) =>{
-    e.preventDefault()
-    image.hide()
-  })
-
   window.webContents.on('devtools-opened', () => {
     window.focus()
     setImmediate(() => {
       window.focus()
     })
   })
-
-  splashWindow.on('closed', () =>{
-    splashWindow = null
-  })
-
-  splashWindow.once('ready-to-show', () =>{
-    splashWindow.show()
-  })
-
-
-
-  imageWindow = image
-
-  let filePath = path.join(app.getAppPath(),'test.txt')
-  console.log(filePath)
-  // shell.showItemInFolder(filePath)
-  // shell.openItem(filePath)
-
-  startCheckingOnlineStatus()
 
   return window
 }
@@ -115,10 +79,6 @@ app.on('ready', async () => {
     await installVueDevtools()
   }
   mainWindow = createMainWindow()
-})
-
-ipcMain.on('toggle-image', (event: IpcMessageEvent, arg: any) =>{
-  imageWindow.show()
 })
 
 let checkIsOnlineInterval: NodeJS.Timer 

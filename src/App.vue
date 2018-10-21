@@ -1,9 +1,28 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/onOff">On-Off Line Test</router-link>
+  <div class="container-fluid" id="app">
+    <div class="row">
+      <nav class="col-md-2 d-md-bolck bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <router-link to="/onOff">On-Off Line Test</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/about">About</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/raddit">Raddit</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/start">Vue Start</router-link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <router-view/>
+      </main>
     </div>
-    <router-view/>
   </div>
 </template>
 
