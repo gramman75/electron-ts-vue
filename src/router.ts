@@ -34,7 +34,7 @@ export default new Router({
     {
       path: '/start',
       name: 'start',
-      component: () => import('./views/Start.vue')
+      component: () => import('./views/StartView.vue')
     }
 
   ],
