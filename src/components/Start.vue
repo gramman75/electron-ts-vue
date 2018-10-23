@@ -31,18 +31,20 @@
 
 </template>
 <script lang="ts">
-// module.exports = {
-//     data: function(){
-//         return {
-//             message : 'Hello'
-//         }
-//     }
-// }
+
+
 import { Component, Vue , Prop} from "vue-property-decorator";
 
-@Component
+@Component({
+    props: {
+        todos: Array<any>()
+    }
+})
 export default class Start extends Vue{
-    @Prop() todos: Array<any> = []
+    // @Prop() todos: Array<any> = []
+    // @Prop({default: []})
+    // todos: Array<any> =[]
+
 
     message: string
     seen: boolean

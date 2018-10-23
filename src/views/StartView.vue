@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <Startv todos="items" />
+        <Start :todos="items" />
     </div>
 
 </template>
@@ -20,7 +20,7 @@ export default class StartView extends Vue{
     constructor(){
         super()
         this.items = [
-            { id: 1,  text: 'Javascript'},
+            { id: 1, text: 'Javascript'},
             { id: 2, text: 'Java'},
             { id: 3, text: 'Python'},
             { id: 4, text: 'Vue'}
