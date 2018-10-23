@@ -2,16 +2,18 @@
 <template>
     <div>
         <Start :todos="items" />
+        <WatchSample />
     </div>
 
 </template>
 <script lang="ts">
 import { Component, Vue , Prop} from "vue-property-decorator";
 import  Start from "@/components/Start.vue";
+import  WatchSample from "@/components/WatchSample.vue";
 
 @Component({
     components:{
-        Start
+        Start, WatchSample
     }
 })
 export default class StartView extends Vue{

@@ -19,7 +19,7 @@
 
         <div id="app-5">
             <p>{{ message }}</p>
-            <button v-on:click="reverseMessage">Revers Message</button>
+            <button @click="reverseMessage">Revers Message</button>
         </div>
 
         <div id="app-6">
@@ -27,13 +27,16 @@
             <input class="form-control form-control-lg" type="text" v-model="message">
         </div>
         
+        <div id="app-7">
+            <p>{{ messageProp }}</p>
+        </div>
     </div>
 
 </template>
 <script lang="ts">
 
 
-import { Component, Vue , Prop} from "vue-property-decorator";
+import { Component, Vue , Prop, Watch} from "vue-property-decorator";
 
 @Component({
     props: {
@@ -60,6 +63,48 @@ export default class Start extends Vue{
         //     { id: 4, text: 'Vue'}
         // ]
     }
+
+    @Watch('message')
+    onMessageChanged(value: string, oldValue: string){
+        console.log(`old value : ${oldValue}, new Value : ${value}`)
+    }
+
+    get messageProp(){
+        return this.message + '_computed'
+    }
+
+    beforeCreate() {
+        console.log('beforeCreate')
+    }
+
+    created(){
+        console.log('created')
+    }
+
+    beforeMount() {
+        console.log('beforeMount')
+    }
+
+    mounted() {
+        console.log('mounted')
+    }
+
+    beforeUpdate() {
+        console.log('beforeUpdate')
+    }
+
+    updated(){
+        console.log('updated')
+    }
+
+    beforeDestroy(){
+        console.log('beforeDestroy')
+    }
+
+    destroyed(){
+        console.log('destroyed')
+    }
+
 
     reverseMessage(): void{
         this.message = this.message.split('').reverse().join('')
