@@ -27,8 +27,27 @@
             <input class="form-control form-control-lg" type="text" v-model="message">
         </div>
         
-        <div id="app-7">
-            <p>{{ messageProp }}</p>
+        <div id="app-7"> <p>{{ messageProp }}</p>
+        </div>
+
+        <div id="app-8">
+            <div class="alert" v-bind:class="classObject"></div>
+        </div>
+
+        <div id="app-9">
+            <div v-if="message =='1'">
+                Display One
+            </div>
+            <div v-else-if="message =='2'">
+                Display Two 
+            </div>
+            <div v-else-if="message =='3'">
+                <h1>Title</h1>
+                <p>Paragraph 1</p>
+            </div>
+            <div v-else>
+                Display Any 
+            </div>
         </div>
     </div>
 
@@ -38,12 +57,13 @@
 
 import { Component, Vue , Prop, Watch} from "vue-property-decorator";
 
-@Component({
-    props: {
-        todos: Array<any>()
-    }
-})
+
+@Component
 export default class Start extends Vue{
+    // @Prop(Number) propA!: number
+
+    @Prop({default: []}) todos!: Array<any>
+
     // @Prop() todos: Array<any> = []
     // @Prop({default: []})
     // todos: Array<any> =[]
@@ -71,6 +91,19 @@ export default class Start extends Vue{
 
     get messageProp(){
         return this.message + '_computed'
+    }
+
+    get classObject(){
+        let p: string = 'alert-primary'
+        let map: any = {
+            '1' : 'alert-secondary',
+            '2' : 'alert-success',
+            '3' : 'alert-danger'
+        }
+
+        p = map[this.message]||'alert-primary'
+
+        return p
     }
 
     beforeCreate() {
