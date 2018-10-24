@@ -11,8 +11,8 @@
 
         <div id="app-4">
             <ol>
-                <li v-for="todo in todos" :key="todo.id">
-                    {{ todo.text }}
+                <li v-for="(todo, index) in todos":key="todo.id">
+                   {{ index }} - {{ todo.text }}
                 </li>
             </ol>
         </div>

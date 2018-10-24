@@ -35,6 +35,11 @@ export default new Router({
       path: '/start',
       name: 'start',
       component: () => import('./views/StartView.vue')
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: () => import('./views/List.vue')
     }
 
   ],

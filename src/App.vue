@@ -16,6 +16,9 @@
             <li class="nav-item">
               <router-link to="/start">Vue Start</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/list">Vue List</router-link>
+            </li>
           </ul>
         </div>
       </nav>
