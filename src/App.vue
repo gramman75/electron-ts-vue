@@ -1,5 +1,4 @@
-<template>
-  <div class="container-fluid" id="app">
+<template> <div class="container-fluid" id="app">
     <div class="row">
       <nav class="col-md-2 d-md-bolck bg-light sidebar">
         <div class="sidebar-sticky">
@@ -18,6 +17,9 @@
             </li>
             <li class="nav-item">
               <router-link to="/list">Vue List</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/event">Vue Event</router-link>
             </li>
           </ul>
         </div>

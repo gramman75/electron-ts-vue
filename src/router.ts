@@ -40,7 +40,11 @@ export default new Router({
       path: '/list',
       name: 'list',
       component: () => import('./views/List.vue')
+    },
+    {
+      path: '/event',
+      name: 'event',
+      component: () => import('./views/Event.vue')
     }
-
   ],
 });

@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, ipcMain, IpcMessageEvent, shell } from 'electron'
+import { dialog, app, protocol, BrowserWindow, ipcMain, IpcMessageEvent, shell } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
 // const isOnline = require('is-online')
@@ -102,3 +102,14 @@ function startCheckingOnlineStatus(){
 }
 
 ipcMain.on('check-online-status', checkIsOnline)
+
+ipcMain.on('warn', (event: Event, arg: string) => {
+  dialog.showMessageBox({
+    title: 'Warning Message',
+    message: arg,
+    detail: 'message detail',
+    buttons: ['Save', 'Don\'t Save', 'Cancel'],
+    defaultId: 0,
+  })
+})
+  

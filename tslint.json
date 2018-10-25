@@ -15,6 +15,17 @@
     "ordered-imports": false,
     "object-literal-sort-keys": false,
     "no-consecutive-blank-lines": false,
-    "semicolon": [true, "never"]
+    "semicolon": [true, "never"],
+    "no-console": {
+      "severity": "warning",
+      "options": [
+        "debug",
+        "info",
+        "log",
+        "time",
+        "timeEnd",
+        "trace"
+      ]
+    }
   }
 }

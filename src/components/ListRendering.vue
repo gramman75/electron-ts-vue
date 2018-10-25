@@ -52,6 +52,7 @@
                 >
                 <ul>
                     <TodoItem 
+                    
                     v-for="(todo, index) in todos"
                     v-bind:key="todo.id"
                     v-bind:title="todo.text"
