@@ -24,6 +24,9 @@
             <li class="nav-item">
               <router-link to="/form">Vue Form</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/comp">Vue Component</router-link>
+            </li>
           </ul>
         </div>
       </nav>

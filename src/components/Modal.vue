@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-          {{ message }}
+          {{ newMessage }}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -22,10 +22,18 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import _ from 'lodash'
 
 @Component
 export default class Modal extends Vue{
-  @Prop() message!: string
+  @Prop({
+    type: String, 
+    required: true, 
+    validator: function(v) {
+      
+      return !_.isEmpty(v)
+      } 
+    }) newMessage!: string 
   @Prop() cb!: Function 
 
 }

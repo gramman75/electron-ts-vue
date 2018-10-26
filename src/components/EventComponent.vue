@@ -12,7 +12,7 @@
             <button name="bnt2" id="bnt2" class="btn btn-warning" v-on:click.once="warn('Form cannot be submitted yet',$event)" role="button">Only 1 Warn</button> 
         </div>
         <div id="app-3" class="border">
-            <input type="text" v-on:keyup.enter="submit">
+            <input type="text" v-model.number="inputValue" v-on:keyup.enter="submit">
         </div>
 
         <div id="app-4" class="border">
@@ -21,7 +21,7 @@
             </button>
         </div>
 
-        <Modal v-bind:message="msg" v-bind:cb="submit" />
+        <modal v-bind:newMessage="inputValue" v-bind:cb="submit" />
     </div>
     
 </template>
@@ -30,21 +30,23 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import { ipcRenderer } from "electron";
-import Modal from "@/components/Modal.vue"
+import  Modal from "@/components/Modal.vue"
 
 @Component({
     components:{
-        Modal
+        'modal' : Modal // or Modal
     }
 })
 export default class EventComponent extends Vue{
 
     counter: number
     msg: string
+    inputValue: string 
     constructor(){
         super();
         this.counter = 0
         this.msg = "경고 메세지"
+        this.inputValue = '9' 
     }
 
     warn(message: string, event: Event ) {

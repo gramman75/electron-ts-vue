@@ -51,5 +51,10 @@ export default new Router({
       name: 'form',
       component: () => import('./views/Form.vue')
     },
+    {
+      path: '/comp',
+      name: 'comp',
+      component: () => import('./views/Comp.vue')
+    },
   ],
 })
