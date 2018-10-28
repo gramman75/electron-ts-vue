@@ -56,5 +56,15 @@ export default new Router({
       name: 'comp',
       component: () => import('./views/Comp.vue')
     },
+    {
+      path: '/transition',
+      name: 'transition',
+      component: () => import('./views/Transition.vue')
+    },
+    {
+      path: '/mixin',
+      name: 'mixin',
+      component: () => import('./views/Mixin.vue')
+    },
   ],
 })

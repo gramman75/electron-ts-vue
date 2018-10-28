@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Child Component</h2>
+        <h2>{{ title }}</h2>
         <slot name="header" />
         <slot>
             Content가 없는 경우 보입니다.
@@ -13,5 +13,13 @@
 import { Vue, Component } from "vue-property-decorator";    
 
 @Component
-export default class SlotComponent extends Vue{}
+export default class SlotComponent extends Vue{
+    title: string
+
+    constructor(){
+        super()
+        this.title = 'Child Component'
+    }
+
+}
 </script>
