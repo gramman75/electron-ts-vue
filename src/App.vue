@@ -33,6 +33,9 @@
             <li class="nav-item">
               <router-link to="/mixin">Vue Mixin</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/customDirective">Vue Custom Directive</router-link>
+            </li>
           </ul>
         </div>
       </nav>

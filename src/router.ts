@@ -66,5 +66,10 @@ export default new Router({
       name: 'mixin',
       component: () => import('./views/Mixin.vue')
     },
+    {
+      path: '/customDirective',
+      name: 'customDirective',
+      component: () => import('./views/CustomDirective.vue')
+    },
   ],
 })

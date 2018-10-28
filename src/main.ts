@@ -15,3 +15,8 @@ new Vue({
   render: (h) => h(App),
 }).$mount('#app');
 
+Vue.directive('focus', {
+  inserted: function(el){
+    el.focus()
+  }
+})
