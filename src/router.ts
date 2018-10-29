@@ -71,5 +71,10 @@ export default new Router({
       name: 'customDirective',
       component: () => import('./views/CustomDirective.vue')
     },
+    {
+      path: '/render',
+      name: 'render',
+      component: () => import('./views/Render.vue')
+    },
   ],
 })

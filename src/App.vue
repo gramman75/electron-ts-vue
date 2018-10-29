@@ -36,6 +36,9 @@
             <li class="nav-item">
               <router-link to="/customDirective">Vue Custom Directive</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/render">Vue Render</router-link>
+            </li>
           </ul>
         </div>
       </nav>

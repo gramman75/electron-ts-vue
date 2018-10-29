@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import './plugins/vuetify'
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -16,7 +17,11 @@ new Vue({
 }).$mount('#app');
 
 Vue.directive('focus', {
-  inserted: function(el){
+  
+  inserted: function(el) {
     el.focus()
+  },
+  componentUpdated: function(el) {
+   console.log('focus directive')
   }
 })
