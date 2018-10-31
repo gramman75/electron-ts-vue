@@ -25,3 +25,10 @@ Vue.directive('focus', {
    console.log('focus directive')
   }
 })
+
+
+Vue.filter('capitalize', function(value: any){
+  if (!value) return ''
+  let v: string = value.toString()
+  return v.charAt(0).toUpperCase() + v.slice(1)
+})

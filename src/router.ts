@@ -76,5 +76,10 @@ export default new Router({
       name: 'render',
       component: () => import('./views/Render.vue')
     },
+    {
+      path: '/filter',
+      name: 'filter',
+      component: () => import('./views/Filter.vue')
+    },
   ],
 })
