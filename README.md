@@ -1,4 +1,6 @@
 # electron-ts-vue
+electron-typescript-vue 사용을 위한 template
+vue는 class base component를 사용함.
 
 ## Project setup
 ```
