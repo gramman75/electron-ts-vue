@@ -81,5 +81,10 @@ export default new Router({
       name: 'filter',
       component: () => import('./views/Filter.vue')
     },
+    {
+      path: '/asyncUpdate',
+      name: 'asyncUpdate',
+      component: () => import('./views/AsyncUpdate.vue')
+    },
   ],
 })

@@ -42,6 +42,9 @@
             <li class="nav-item">
               <router-link to="/filter">Vue Filter</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/asyncUpdate">Vue Async Update DOM</router-link>
+            </li>
           </ul>
         </div>
       </nav>
