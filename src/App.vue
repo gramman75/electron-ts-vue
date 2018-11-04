@@ -45,6 +45,15 @@
             <li class="nav-item">
               <router-link to="/asyncUpdate">Vue Async Update DOM</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/dynamicRoute/foo">Vue Dynamic Route(foo)</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/dynamicRoute/bar">Vue Dynamic Route(bar)</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/vuex">Vue Vuex</router-link>
+            </li>
           </ul>
         </div>
       </nav>

@@ -86,5 +86,19 @@ export default new Router({
       name: 'asyncUpdate',
       component: () => import('./views/AsyncUpdate.vue')
     },
+    {
+      path: '/dynamicRoute/:id',
+      name: 'dynamicRoute',
+      component: () => import('./views/DynamicRoute.vue'),
+      beforeEnter: (to, from , next) => {
+        console.log('each route before enter')
+        debugger;
+      }
+    },
+    {
+      path: '/vuex',
+      name: 'vuex',
+      component: () => import('./views/VuexView.vue')
+    },
   ],
 })

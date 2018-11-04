@@ -25,6 +25,7 @@
 import  { Component, Vue, Prop } from "vue-property-decorator";
 import fs from "fs"
 import electron from "electron"
+import { constants } from 'http2';
 
 @Component
 export default class RenderComponent extends Vue{
@@ -47,16 +48,19 @@ export default class RenderComponent extends Vue{
     }
 
     saveFile() {
+        console.log(this.$store.getters.getCount)
         electron.remote.dialog.showOpenDialog({
             title: 'Select...',
             properties : ['openFile']
         },
         (filePaths: string[], bookmarks: string[])=>{
-            let filePath = filePaths[0]
-            fs.readFile(filePath, (err: any, data: Buffer)=>{
-                this.result = data.toString()
-                console.log(data.toString())
-            })
+            if (filePaths){
+                let filePath = filePaths[0]
+                fs.readFile(filePath, (err: any, data: Buffer)=>{
+                    this.result = data.toString()
+                    console.log(data.toString())
+                })
+            }
         })        
         // fs.readFile('d:\\hr_psn_mst', (err: any , data: Buffer) =>
         // {
