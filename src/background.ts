@@ -1,11 +1,12 @@
 'use strict'
 
-import { dialog, app, protocol, BrowserWindow, ipcMain, IpcMessageEvent, shell } from 'electron'
+import { Menu, dialog, app, protocol, BrowserWindow, ipcMain, IpcMessageEvent, shell } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
 // const isOnline = require('is-online')
-import {isOnline} from 'is-online'
+// import {isOnline} from 'is-onlne'
 
+import {MenuService } from './common/menu'
 
 // const isOnline = require('is-online')
 
@@ -72,12 +73,17 @@ app.on('activate', () => {
   }
 })
 
+let m = new MenuService()
+
 // create main BrowserWindow when electron is ready
 app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
     await installVueDevtools()
   }
+
+  const menu = Menu.buildFromTemplate(m.template)
+  Menu.setApplicationMenu(menu)
   mainWindow = createMainWindow()
 })
 

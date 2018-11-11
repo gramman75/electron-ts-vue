@@ -30,6 +30,7 @@
     "@vue/cli-plugin-typescript": "^3.0.5",
     "@vue/cli-service": "^3.0.5",
     "asar": "^0.14.5",
+    "devtron": "^1.4.0",
     "electron": "^3.0.4",
     "electron-packager": "^12.2.0",
     "expose-loader": "^0.7.5",
