@@ -100,5 +100,10 @@ export default new Router({
       name: 'vuex',
       component: () => import('./views/VuexView.vue')
     },
+    {
+      path: '/vuetify',
+      name: 'vuetify',
+      component: () => import('./views/VuetifyView.vue')
+    },
   ],
 })

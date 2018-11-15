@@ -52,6 +52,9 @@
             <li class="nav-item">
               <router-link to="/vuex">Vue Vuex</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/vuetify">Vue Vuetify</router-link>
+            </li>
         </ul>
     </div>
 </template>
