@@ -11,7 +11,7 @@
 
         <div id="app-4">
             <ol>
-                <li v-for="(todo, index) in todos":key="todo.id">
+                <li v-for="(todo, index) in todos" v-bind:key="todo.id">
                    {{ index }} - {{ todo.text }}
                 </li>
             </ol>
@@ -87,6 +87,13 @@ export default class Start extends Vue{
     @Watch('message')
     onMessageChanged(value: string, oldValue: string){
         console.log(`old value : ${oldValue}, new Value : ${value}`)
+    }
+
+    @Watch('todos')
+    onItemChanged(value: Array<{id: string, text: string}>, oldValue: any){
+        debugger;
+        alert(value.map( v=> v.text).join(','));
+        console.log('add :' +  value);
     }
 
     get messageProp(){
